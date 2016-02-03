@@ -8,6 +8,7 @@ ViewController.m中可以查看SDZoomHeaderView的使用方法：
 如果需要根据图片高度来展示头部区域，可以设置isFullImage属性
       self.headerView.isFullImage = YES;
   一定要实现下面的方法
+  
     -(void)scrollViewDidScroll:(UIScrollView *)scrollView
     {
       CGFloat offsetY = scrollView.contentOffset.y;
