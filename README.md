@@ -2,6 +2,7 @@
 1.
 使用的时候，将SDZoomHeaderView.h和SDZoomHeaderView.m导入到工程中。创建一个SDZoomHeaderView的对象，赋值给tableView的tableHeaderView就可以了。当然也可以自定义在其上面添加子view.
 对于子view的布局目前还没有做，以后有时间再做吧
+
 2.
 为tableView添加可拉伸的headerView。
 ViewController.m中可以查看SDZoomHeaderView的使用方法：
