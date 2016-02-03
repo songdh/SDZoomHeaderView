@@ -1,9 +1,11 @@
 # SDZoomHeaderView
-1.
+1.如何添加
+----------
 使用的时候，将SDZoomHeaderView.h和SDZoomHeaderView.m导入到工程中。创建一个SDZoomHeaderView的对象，赋值给tableView的tableHeaderView就可以了。当然也可以自定义在其上面添加子view.
 对于子view的布局目前还没有做，以后有时间再做吧
 
-2.
+2.拉伸功能
+----------
 为tableView添加可拉伸的headerView。
 ViewController.m中可以查看SDZoomHeaderView的使用方法：
 
@@ -24,7 +26,9 @@ ViewController.m中可以查看SDZoomHeaderView的使用方法：
     }
 
 
-3.对于需要添加navigationBar的界面，添加了UINavigationController+extention类别，可在SecondViewController.h中查看使用方法
+3.navigationControllerBar
+---------------------------
+对于需要添加navigationBar的界面，添加了UINavigationController+extention类别，可在SecondViewController.h中查看使用方法
 
       //修改navigationBar
       [self.navigationController setTitleColor:[UIColor clearColor]];
