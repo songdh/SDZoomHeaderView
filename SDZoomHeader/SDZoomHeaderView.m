@@ -17,11 +17,14 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor blueColor];
-        _originRect = self.bounds;
+        self.backgroundColor = [UIColor whiteColor];
         
+        _backgroundView = [[UIView alloc]initWithFrame:self.bounds];
+        _backgroundView.backgroundColor = self.backgroundColor;
+        [self addSubview:_backgroundView];
+
         _imageView = [[UIImageView alloc]initWithFrame:self.bounds];
-        _imageView.backgroundColor = [UIColor yellowColor];
+        _imageView.backgroundColor = [UIColor clearColor];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.clipsToBounds = YES;
         [self addSubview:_imageView];
@@ -35,24 +38,33 @@
 {
     _offsetY = offsetY;
     
-    if (_isFullImage) {
-        
-        if (_offsetY < 0) {
-            self.imageView.frame = CGRectMake(CGRectGetMinX(self.originRect), _offsetY, CGRectGetWidth(self.originRect), CGRectGetHeight(_originRect) - _offsetY);
+    if (_offsetY < 0) {
+        if (_isFullImage) {
+            self.imageView.frame = CGRectMake(CGRectGetMinX(self.imageView.frame),
+                                              _offsetY+_imageViewEdgeInsets.top,
+                                              CGRectGetWidth(self.bounds)-self.imageViewEdgeInsets.left-self.imageViewEdgeInsets.right,
+                                              CGRectGetHeight(self.bounds)-self.imageViewEdgeInsets.top-self.imageViewEdgeInsets.bottom - _offsetY);
         }else{
-            self.imageView.frame = _originRect;
-        }
-    }else{
-
-        if (_offsetY < 0) {
-            CGFloat height = CGRectGetHeight(_originRect) - offsetY;
+            CGFloat height = CGRectGetHeight(self.bounds)-self.imageViewEdgeInsets.top-self.imageViewEdgeInsets.bottom - _offsetY;
             CGFloat width = height * self.aspectRatio;
-            self.imageView.frame = CGRectMake( (CGRectGetWidth(_originRect) - width)/2, _offsetY, width, height);
             
-        }else{
-            self.imageView.frame = _originRect;
+            self.imageView.frame = CGRectMake((CGRectGetWidth(self.bounds)-width)/2, _offsetY+_imageViewEdgeInsets.top, width, height);
+            
         }
     }
+    
+    self.backgroundView.frame = CGRectMake(0,
+                                           CGRectGetMinY(self.imageView.frame)-_imageViewEdgeInsets.top,
+                                           CGRectGetWidth(self.bounds),
+                                           CGRectGetHeight(self.imageView.frame)+_imageViewEdgeInsets.bottom+_imageViewEdgeInsets.top);
+}
+
+-(void)setImageViewEdgeInsets:(UIEdgeInsets)imageViewEdgeInsets
+{
+    _imageViewEdgeInsets = imageViewEdgeInsets;
+    CGRect rect = CGRectMake(_imageViewEdgeInsets.left, _imageViewEdgeInsets.top, CGRectGetWidth(self.bounds)-_imageViewEdgeInsets.left-_imageViewEdgeInsets.right, CGRectGetHeight(self.bounds)-_imageViewEdgeInsets.top-_imageViewEdgeInsets.bottom);
+    self.imageView.frame = rect;
+    self.aspectRatio = CGRectGetWidth(self.imageView.frame)/CGRectGetHeight(self.imageView.frame);
 }
 
 @end
