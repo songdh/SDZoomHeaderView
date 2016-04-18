@@ -10,7 +10,6 @@
 
 @interface SDZoomHeaderView ()
 @property (nonatomic, assign) CGFloat aspectRatio;//宽高比  width/height
-@property (nonatomic, assign) CGRect originRect;//记录原始的rect
 @end
 
 @implementation SDZoomHeaderView
@@ -26,7 +25,6 @@
         _imageView = [[UIImageView alloc]initWithFrame:self.bounds];
         _imageView.backgroundColor = [UIColor clearColor];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
-        _imageView.clipsToBounds = YES;
         [self addSubview:_imageView];
         
         self.aspectRatio = CGRectGetWidth(frame)/CGRectGetHeight(frame);
